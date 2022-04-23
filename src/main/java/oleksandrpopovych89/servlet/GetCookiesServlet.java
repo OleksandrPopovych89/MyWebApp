@@ -1,29 +1,26 @@
-package com.example.mywebapp;
+package oleksandrpopovych89.servlet;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "FirstServlet", value = "/FirstServlet")
-public class FirstServlet extends HttpServlet {
+public class GetCookiesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Cookie[] cookies = request.getCookies();
 
         PrintWriter pw = response.getWriter();
         pw.println("<html>");
-        pw.println("<h1>Hello!</h1>");
+        for (Cookie cookie : cookies) {
+            pw.println("<h1>" + cookie.getName() + " : " + cookie.getValue() + "</h1>");
+        }
         pw.println("</html>");
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 
     }
 }
