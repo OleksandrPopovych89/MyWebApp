@@ -2,12 +2,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>Робочий стіл менеджера</title>
 </head>
-<body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="servlet">Hello Servlet</a>
-</body>
+<div style="text-align: center;">
+
+    <body>
+    <h1><%= "Робочий стіл менеджера" %>
+    </h1>
+    <h2>
+        <p><a href="/orders-list">Перейти до листа замовленнь</a>
+    </h2>
+
+    </body>
+</div>
 </html>
