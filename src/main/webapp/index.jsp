@@ -7,10 +7,10 @@
 <div style="text-align: center;">
 
     <body>
-    <h1><%= "Робочий стіл менеджера" %>
+    <h1><%="Робочий стіл менеджера"%>
     </h1>
     <h2>
-        <p><a href="/orders-list">Перейти до листа замовленнь</a>
+        <p><a href="${pageContext.request.contextPath}/orders-list">Перейти до листа замовленнь</a>
     </h2>
 
     </body>

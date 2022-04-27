@@ -34,14 +34,6 @@ public class OrdersRepoDB {
     private OrdersRepoDB() {
     }
 
-    public static OrdersRepoDB getEquipmentRepositoryDB() {
-        if (eRepositoryDB == null) {
-            eRepositoryDB = new OrdersRepoDB();
-        }
-        return eRepositoryDB;
-    }
-
-    //Connect to DB
     public static void connectToDB() throws ClassNotFoundException, SQLException {
         Class.forName(JDBC_DRIVER);
         conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
@@ -53,10 +45,10 @@ public class OrdersRepoDB {
         System.out.println("Creating orders table.");
 
         String sql = "CREATE TABLE if not exists order_list" +
-                "`(order_id int not null auto_increment, " +
-                " order_create_time DATA (), " +
-                " order_save_time DATA , " +
-                " PRIMARY KEY (id))";
+                "(order_id int not null auto_increment, " +
+                " order_create_time DATE, " +
+                " order_save_time DATE, " +
+                " primary key (order_id))";
 
         System.out.println(sql);
         st = conn.createStatement();

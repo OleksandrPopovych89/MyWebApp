@@ -16,19 +16,17 @@ import java.sql.SQLException;
 public class CreateOrderController extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Integer id;
         try {
             id = OrdersRepoDB.addNewOrder();
             OrderRepoDB.createOrder(id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
+        } catch (SQLException | InterruptedException e) {
             throw new RuntimeException(e);
         }
         response.sendRedirect("/order-list?id=" + id);

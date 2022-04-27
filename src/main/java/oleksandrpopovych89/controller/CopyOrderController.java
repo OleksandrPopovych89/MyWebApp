@@ -14,21 +14,18 @@ import java.sql.SQLException;
 
 @WebServlet("/copy-order")
 public class CopyOrderController extends HttpServlet {
-
-    private Order order;
-
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Integer id = Integer.parseInt(request.getParameter("id"));
 
         try {
             OrderRepoDB.copyOrderById(id, OrdersRepoDB.addNewOrder());
-        } catch (SQLException e) {
+        } catch (SQLException | InterruptedException e) {
             throw new RuntimeException(e);
         }
         response.sendRedirect("/orders-list");

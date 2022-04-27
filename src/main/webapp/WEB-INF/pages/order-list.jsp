@@ -19,42 +19,57 @@
 </head>
 <body>
 <h3>
-    <a href="/orders-list">< Повернутися до листа замовленнь </a>
+    <a href="${pageContext.request.contextPath}/orders-list">< Повернутися до листа замовленнь </a>
 </h3>
 <div style="text-align: center;">
     <h2>Замовлення №<%=order.getOrderId()%>
     </h2>
 </div>
-    <table border="1" , style="margin: 0 auto; border: solid 2px black;">
-        <tr>
-            <th>№ по порядку</th>
-            <th>Найменування</th>
-            <th>Позначення</th>
-            <th>Артикул</th>
-            <th>Виробник</th>
-            <th>Од. вимірювання</th>
-            <th>Кількість</th>
-        </tr>
-        <%
-            int i;
-            for (i = 0; i < order.getEquipmentList().size(); i++) {
+
+<div style="text-align: center;">
+    <h4>
+        <a href="${pageContext.request.contextPath}/add-new-position?id=<%=order.getOrderId()%>"> Додати нову
+            позицію</a>
+    </h4>
+</div>
+<table border="1" , style="margin: 0 auto; border: solid 2px black;">
+    <tr>
+        <th>№ по порядку</th>
+        <th>Найменування</th>
+        <th>Позначення</th>
+        <th>Артикул</th>
+        <th>Виробник</th>
+        <th>Од. вимірювання</th>
+        <th>Кількість</th>
+        <th colspan="1">Операції</th>
+    </tr>
+    <%
+        int i;
+        for (i = 0; i < order.getEquipmentList().size(); i++) {
 
 
-        %>
+    %>
 
-        <tr>
-            <td style="text-align: center;"><%=order.getEquipmentList().get(i).getEqId()%>
-            <td><%=order.getEquipmentList().get(i).getName()%>
-            <td><%=order.getEquipmentList().get(i).getShortName()%>
-            <td><%=order.getEquipmentList().get(i).getVendorCode()%>
-            <td style="text-align: center;"><%=order.getEquipmentList().get(i).getVendorName()%>
-            <td style="text-align: center;"><%=order.getEquipmentList().get(i).getUnits()%>
-            <td style="text-align: center;"><%=order.getEquipmentList().get(i).getQuantity()%>
-        </tr>
-        <%
-            }
-        %>
-    </table>
+    <tr>
+        <td style="text-align: center;">
+                <%=i+1%>
+        <td><%=order.getEquipmentList().get(i).getName()%>
+        <td><%=order.getEquipmentList().get(i).getShortName()%>
+        <td><%=order.getEquipmentList().get(i).getVendorCode()%>
+        <td style="text-align: center;"><%=order.getEquipmentList().get(i).getVendorName()%>
+        <td style="text-align: center;"><%=order.getEquipmentList().get(i).getUnits()%>
+        <td style="text-align: center;"><%=order.getEquipmentList().get(i).getQuantity()%>
+        <td>
+            <a href="${pageContext.request.contextPath}/delete-position?oid=<%=order.getOrderId()%>&pid=<%=order.getEquipmentList().get(i).getEqId()%>">Видалти
+                позицію </a></td>
+
+    </tr>
+    <%
+        }
+    %>
+</table>
+
+
 
 </body>
 </html>

@@ -6,7 +6,6 @@ import oleksandrpopovych89.logic.essence.Order;
 import java.sql.*;
 
 public class OrderRepoDB {
-    private static OrderRepoDB eRepositoryDB = null;
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/mydb";
     static final String USER = "root";
@@ -25,13 +24,6 @@ public class OrderRepoDB {
     }
 
     private OrderRepoDB() {
-    }
-
-    public static OrderRepoDB getEquipmentRepositoryDB() {
-        if (eRepositoryDB == null) {
-            eRepositoryDB = new OrderRepoDB();
-        }
-        return eRepositoryDB;
     }
 
     //Connect to DB
@@ -62,19 +54,23 @@ public class OrderRepoDB {
     }
 
 
-    public static void setOrTab(Order order) throws SQLException {
+    public static void addNewPosition(Integer orderId) throws SQLException {
         System.out.println("Adding equipment to the table...");
-        for (Equipment eq : order.getEquipmentList()) {
-            String sql = "INSERT INTO `" + order.getOrderId() + "` (name, shortName, vendorName, vendorCode, units, quantity) VALUES (?, ?, ?, ?, ?, ?)";
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, eq.getName());
-            ps.setString(2, eq.getShortName());
-            ps.setString(3, eq.getVendorName());
-            ps.setString(4, eq.getVendorCode());
-            ps.setString(5, eq.getUnits());
-            ps.setInt(6, eq.getQuantity());
-            ps.executeUpdate();
-        }
+        String sql = "INSERT INTO `" + orderId + "` (name, shortName, vendorName, vendorCode, units, quantity) VALUES (?, ?, ?, ?, ?, ?)";
+        ps = conn.prepareStatement(sql);
+        ps.setString(1, null);
+        ps.setString(2, null);
+        ps.setString(3, null);
+        ps.setString(4, null);
+        ps.setString(5, null);
+        ps.setInt(6, 0);
+        ps.executeUpdate();
+    }
+
+    public static void deletePositionById(Integer orderId, Integer positionId) throws SQLException {
+        String sql = "DELETE FROM `" + orderId + "` WHERE id =" + positionId;
+        st = conn.createStatement();
+        st.execute(sql);
     }
 
     public static void truncateTable(Order order) throws SQLException, InterruptedException {
@@ -114,9 +110,10 @@ public class OrderRepoDB {
         return order;
     }
 
-    public static void copyOrderById(Integer orderId, Integer newOrderId) throws SQLException {
+    public static void copyOrderById(Integer orderId, Integer newOrderId) throws SQLException, InterruptedException {
         st = conn.createStatement();
-        String sql = "CREATE TABLE `" + newOrderId + "` SELECT * FROM `" + orderId + "`";
+        createOrder(newOrderId);
+        String sql = "INSERT INTO `" + newOrderId + "` SELECT * FROM `" + orderId + "`";
         System.out.println(sql);
         ps = conn.prepareStatement(sql);
         ps.executeUpdate();

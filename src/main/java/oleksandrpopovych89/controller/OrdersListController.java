@@ -18,7 +18,7 @@ import java.util.List;
 @WebServlet("/orders-list")
 public class OrdersListController extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
     }
 

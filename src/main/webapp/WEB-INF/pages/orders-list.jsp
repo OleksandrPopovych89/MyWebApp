@@ -25,10 +25,8 @@
     <h2>Лист замовленнь </h2>
 
     <h4>
-        <a href="/create-order"> Створити нове замовлення</a>
+        <a href="${pageContext.request.contextPath}/create-order"> Створити нове замовлення</a>
     </h4>
-
-    </p>
 
 </div>
 
@@ -54,9 +52,9 @@
         <td style="text-align: center;"><%=simpleDateFormat.format(orderInfoList.get(i).getDateOfCreate())%>
         <td style="text-align: center;"><%=simpleDateFormat.format(orderInfoList.get(i).getDateOfLastSave())%>
 
-        <td><a href="/order-list?id=<%=orderInfoList.get(i).getOrderId()%>">Відкрити замовлення</a></td>
-        <td><a href="/delete-order?id=<%=orderInfoList.get(i).getOrderId()%>">Видалти замовлення </a></td>
-        <td><a href="/copy-order?id=<%=orderInfoList.get(i).getOrderId()%>">Скопіювати замовлення </a></td>
+        <td><a href="${pageContext.request.contextPath}/order-list?id=<%=orderInfoList.get(i).getOrderId()%>">Відкрити замовлення</a></td>
+        <td><a href="${pageContext.request.contextPath}/delete-order?id=<%=orderInfoList.get(i).getOrderId()%>">Видалти замовлення </a></td>
+        <td><a href="${pageContext.request.contextPath}/copy-order?id=<%=orderInfoList.get(i).getOrderId()%>">Скопіювати замовлення </a></td>
 
     </tr>
     <%
